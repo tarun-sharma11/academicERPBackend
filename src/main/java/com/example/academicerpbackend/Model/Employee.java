@@ -32,7 +32,7 @@ public class Employee {
     private String title;
     @Column(name = "PHOTOGRAPH_PATH")
     private String photograph_path;
-    @Column(name = "DEPARTMEFIRST_NAMENT_ID")
+    @Column(name = "DEPARTMENT_ID")
     private long department_id;
 
     public long getEmployee_id() {
