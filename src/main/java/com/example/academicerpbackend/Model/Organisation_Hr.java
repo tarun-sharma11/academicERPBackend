@@ -1,5 +1,8 @@
 package com.example.academicerpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import javax.validation.constraints.NotNull;
@@ -23,8 +26,10 @@ public class Organisation_Hr {
 
     @Column(name = "CONTACT_NUMBER")
     private int contact_number;
-    @ManyToOne(targetEntity = Organisation.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "ORGANISATION_ID",referencedColumnName = "id", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "ORGANISATION_ID",nullable = false)
+    @JsonIgnoreProperties("organisationHr")
     private Organisation organisation;
 
     public Organisation_Hr() {

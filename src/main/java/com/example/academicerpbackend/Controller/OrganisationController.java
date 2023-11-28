@@ -2,11 +2,8 @@ package com.example.academicerpbackend.Controller;
 
 
 import com.example.academicerpbackend.Exception.ResourceNotFound;
-import com.example.academicerpbackend.Model.Employee;
 import com.example.academicerpbackend.Model.Organisation;
-import com.example.academicerpbackend.Model.Organisation_Hr;
 import com.example.academicerpbackend.Repository.OrganisationRepository;
-import com.example.academicerpbackend.Repository.Organisation_HrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
