@@ -12,13 +12,13 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String first_name, String last_name, String email, String title, String photograph_path, long department_id) {
+    public Employee(String first_name, String last_name, String email, String title, String photograph_path, Department department) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.title = title;
         this.photograph_path = photograph_path;
-        this.department_id = department_id;
+        this.department = department;
     }
 
     @Column(name = "FIRST_NAME")
@@ -32,8 +32,10 @@ public class Employee {
     private String title;
     @Column(name = "PHOTOGRAPH_PATH")
     private String photograph_path;
-    @Column(name = "DEPARTMENT_ID")
-    private long department_id;
+
+    @ManyToOne(targetEntity = Department.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "DEPARTMENT_ID",referencedColumnName = "department_id", nullable = false)
+    private Department department;
 
     public long getEmployee_id() {
         return employee_id;
@@ -83,11 +85,11 @@ public class Employee {
         this.photograph_path = photograph_path;
     }
 
-    public long getDepartment_id() {
-        return department_id;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartment_id(long department_id) {
-        this.department_id = department_id;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
