@@ -5,9 +5,7 @@ import jakarta.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "ORGANISATION_HR",uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email", name = "unique_email_constraint")
-})
+@Table(name = "ORGANISATION_HR")
 public class Organisation_Hr {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +24,7 @@ public class Organisation_Hr {
     @Column(name = "CONTACT_NUMBER")
     private int contact_number;
     @ManyToOne(targetEntity = Organisation.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID",referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "ORGANISATION_ID",referencedColumnName = "id", nullable = false)
     private Organisation organisation;
 
     public Organisation_Hr() {
