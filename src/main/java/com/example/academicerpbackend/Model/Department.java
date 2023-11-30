@@ -1,6 +1,9 @@
 package com.example.academicerpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "DEPARTMENTS")
@@ -14,6 +17,10 @@ public class Department {
 
     @Column(name = "CAPACITY")
     private long capacity;
+
+    @OneToMany(mappedBy = "department")
+    @JsonIgnoreProperties("department")
+    private Set<Employee> employees;
 
     public long getDepartment_id() {
         return department_id;

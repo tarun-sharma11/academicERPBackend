@@ -2,9 +2,11 @@ package com.example.academicerpbackend.Controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.example.academicerpbackend.Exception.ResourceNotFound;
 import com.example.academicerpbackend.Model.Employee;
+import com.example.academicerpbackend.Model.Login;
 import com.example.academicerpbackend.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,21 @@ public class EmployeeController {
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
         Employee employee = employeeRepository.findById(id).orElseThrow(()->new ResourceNotFound("Employee not exists with id :"+id));
         return ResponseEntity.ok(employee);
+    }
+
+    public EmployeeController() {
+    }
+
+    @PostMapping("/employee/login")
+    public ResponseEntity<Employee> loginEmployee(@RequestBody Login login){
+         String depName = "Outreach";
+        Employee employee = employeeRepository.findByEmailAndDepartment_Name(login.getEmail(), depName);
+        if (employee == null) {
+            throw new ResourceNotFound("Employee not exists with email: " + login.getEmail());
+        }
+
+        return ResponseEntity.ok(employee);
+
     }
 
     @PutMapping("/employee/{id}")

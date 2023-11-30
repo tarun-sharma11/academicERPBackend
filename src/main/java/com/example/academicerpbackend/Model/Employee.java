@@ -1,5 +1,6 @@
 package com.example.academicerpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -33,8 +34,9 @@ public class Employee {
     @Column(name = "PHOTOGRAPH_PATH")
     private String photograph_path;
 
-    @ManyToOne(targetEntity = Department.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "DEPARTMENT_ID",referencedColumnName = "department_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "department_id")
+    @JsonIgnoreProperties("employees")
     private Department department;
 
     public long getEmployee_id() {

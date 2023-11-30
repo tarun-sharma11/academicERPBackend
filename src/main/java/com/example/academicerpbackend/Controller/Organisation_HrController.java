@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/api/v1/")
 public class Organisation_HrController {
@@ -51,7 +52,7 @@ public class Organisation_HrController {
     }
 
     @DeleteMapping("/organisation/hr/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteOrganisation(@PathVariable Long id, @RequestBody Organisation organisation_hrDetails){
+    public ResponseEntity<Map<String,Boolean>> deleteOrganisation(@PathVariable Long id){
         Organisation_Hr organisation_hr = organisation_hrRepository.findById(id).orElseThrow(()->new ResourceNotFound("Organisation not exists with id :"+id));
         organisation_hrRepository.delete(organisation_hr);
         Map<String,Boolean> response = new HashMap<>();
