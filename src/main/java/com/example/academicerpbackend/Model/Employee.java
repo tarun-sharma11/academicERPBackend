@@ -13,10 +13,11 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String first_name, String last_name, String email, String title, String photograph_path, Department department) {
+    public Employee(String first_name, String last_name, String email, String password, String title, String photograph_path, Department department) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.password = password;
         this.title = title;
         this.photograph_path = photograph_path;
         this.department = department;
@@ -27,8 +28,21 @@ public class Employee {
     @Column(name = "LAST_NAME")
     private String last_name;
 
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "PASSWORD")
+    private String password;
     @Column(name = "TITLE")
     private String title;
     @Column(name = "PHOTOGRAPH_PATH")

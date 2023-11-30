@@ -25,7 +25,7 @@ public class Organisation_Hr {
     private String email;
 
     @Column(name = "CONTACT_NUMBER")
-    private int contact_number;
+    private long contact_number;
 
     @ManyToOne
     @JoinColumn(name = "ORGANISATION_ID",nullable = false)
@@ -75,11 +75,11 @@ public class Organisation_Hr {
         this.email = email;
     }
 
-    public int getContact_number() {
+    public long getContact_number() {
         return contact_number;
     }
 
-    public void setContact_number(int contact_number) {
+    public void setContact_number(long contact_number) {
         this.contact_number = contact_number;
     }
 

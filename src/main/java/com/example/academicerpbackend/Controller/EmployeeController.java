@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/api/v1/")
 public class EmployeeController {
@@ -26,6 +29,8 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     public Employee createEmployee(@RequestBody Employee employee){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        employee.setPassword(encoder.encode(employee.getPassword()));
         return employeeRepository.save(employee);
     }
 
@@ -41,13 +46,22 @@ public class EmployeeController {
     @PostMapping("/employee/login")
     public ResponseEntity<Employee> loginEmployee(@RequestBody Login login){
          String depName = "Outreach";
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+
         Employee employee = employeeRepository.findByEmailAndDepartment_Name(login.getEmail(), depName);
         if (employee == null) {
             throw new ResourceNotFound("Employee not exists with email: " + login.getEmail());
         }
+        else {
+            System.out.println(login.getPassword());
+            System.out.println(employee.getPassword());
+            Boolean isPwdRight = encoder.matches(login.getPassword(),employee.getPassword());
 
-        return ResponseEntity.ok(employee);
-
+            if(isPwdRight)
+            return ResponseEntity.ok(employee);
+            else
+                throw new ResourceNotFound("Incorrect Credentials");
+        }
     }
 
     @PutMapping("/employee/{id}")
